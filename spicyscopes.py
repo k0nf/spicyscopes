@@ -3,27 +3,26 @@ import configparser
 import json
 import os
 import requests
+from colorama import init, Fore, Style
+
+# Initialize colorama
+init()
 
 CONFIG_FILE = os.path.expanduser('~/.spicyscopes')
 
-def save_api_key(api_key):
-    config = configparser.ConfigParser()
-    config['spicyscopes'] = {'api_key': api_key}
-
-    with open(CONFIG_FILE, 'w') as config_file:
-        config.write(config_file)
-
-def load_api_key():
-    config = configparser.ConfigParser()
-
-    if os.path.exists(CONFIG_FILE):
-        config.read(CONFIG_FILE)
-        api_key = config.get('spicyscopes', 'api_key', fallback=None)
-        return api_key
-
-    return None
+# ASCII art for SpicyScopes
+SPICY_SCOPES_ART = f"""
+{Fore.GREEN} SSSSS          iii                 SSSSS                                     
+SS      pp pp         cccc yy   yy SS        cccc  oooo  pp pp     eee   sss  
+ SSSSS  ppp  pp iii cc     yy   yy  SSSSS  cc     oo  oo ppp  pp ee   e s     
+     SS pppppp  iii cc      yyyyyy      SS cc     oo  oo pppppp  eeeee   sss  
+ SSSSS  pp      iii  ccccc      yy  SSSSS   ccccc  oooo  pp       eeeee     s 
+        pp                  yyyyy                        pp              sss  
+{Style.RESET_ALL}
+"""
 
 def main():
+    print(SPICY_SCOPES_ART)
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description='Retrieve in-scope domains from HackerOne API.')
     parser.add_argument('--program', dest='program_id', type=str, required=True,

@@ -14,6 +14,7 @@ setup(
         'numpy',
         'pandas',
         'configparser',
-        'argparse'
+        'argparse',
+        'colorama'
     ],
 )
