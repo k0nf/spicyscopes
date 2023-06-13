@@ -21,6 +21,25 @@ SS      pp pp         cccc yy   yy SS        cccc  oooo  pp pp     eee   sss
 {Style.RESET_ALL}
 """
 
+def save_api_key(api_key):
+    config = configparser.ConfigParser()
+    config['spicyscopes'] = {'api_key': api_key}
+
+    with open(CONFIG_FILE, 'w') as config_file:
+        config.write(config_file)
+
+
+def load_api_key():
+    config = configparser.ConfigParser()
+
+    if os.path.exists(CONFIG_FILE):
+        config.read(CONFIG_FILE)
+        api_key = config.get('spicyscopes', 'api_key', fallback=None)
+        return api_key
+
+    return None
+
+
 def main():
     print(SPICY_SCOPES_ART)
     # Parse command-line arguments
